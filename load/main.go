@@ -17,7 +17,7 @@ func main() {
 }
 
 func load() error {
-	vars := []string{"s", "f"}
+	vars := []string{"bubble_sort", "fusion_sort"}
 	i := rand.Intn(2)
 
 	var requestBody bytes.Buffer

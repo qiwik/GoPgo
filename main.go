@@ -9,8 +9,8 @@ import (
 	"time"
 )
 
-const first = "f"
-const second = "s"
+const bubble = "bubble_sort"
+const fusion = "fusion_sort"
 
 func main() {
 	http.HandleFunc("/sort", sorting)
@@ -40,10 +40,10 @@ func create(m string) []int { //201 -> 345
 	s := seed()
 
 	switch m {
-	case first:
-		sl = forFirst(s)
-	case second:
-		sl = forSecond(s)
+	case bubble:
+		sl = createForBubble(s)
+	case fusion:
+		sl = createForFusion(s)
 	}
 
 	return sl
@@ -53,7 +53,7 @@ func seed() rand.Source { //183 -> 369
 	return rand.NewSource(time.Now().UnixNano())
 }
 
-func forFirst(s rand.Source) []int { //129 = 129
+func createForBubble(s rand.Source) []int { //129 = 129
 	newSl := make([]int, 0)
 
 	for i := 0; i < 1000; i++ {
@@ -63,7 +63,7 @@ func forFirst(s rand.Source) []int { //129 = 129
 	return newSl
 }
 
-func forSecond(s rand.Source) []int { //129 = 129
+func createForFusion(s rand.Source) []int { //129 = 129
 	newSl := make([]int, 0)
 
 	for i := 0; i < 10000; i++ {
@@ -75,16 +75,16 @@ func forSecond(s rand.Source) []int { //129 = 129
 
 func sort(sl []int, m string) bool { //136 = 136
 	switch m {
-	case first:
-		bubble(sl)
-	case second:
-		fusion(sl)
+	case bubble:
+		bubbleSort(sl)
+	case fusion:
+		fusionSort(sl)
 	}
 
 	return true
 }
 
-func bubble(sl []int) { //65 = 65
+func bubbleSort(sl []int) { //65 = 65
 	sorts := false
 
 	for !sorts {
@@ -103,12 +103,12 @@ func bubble(sl []int) { //65 = 65
 	}
 }
 
-func fusion(sl []int) []int {
+func fusionSort(sl []int) []int {
 	if len(sl) == 1 {
 		return sl
 	}
-	left := fusion(sl[0 : len(sl)/2])
-	right := fusion(sl[len(sl)/2:])
+	left := fusionSort(sl[0 : len(sl)/2])
+	right := fusionSort(sl[len(sl)/2:])
 
 	result := make([]int, len(sl))
 
