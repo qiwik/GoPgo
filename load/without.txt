@@ -1,0 +1,36 @@
+goos: linux
+goarch: amd64
+pkg: github.com/qiwik/yarticle/load
+cpu: Intel(R) Core(TM) i5-4200M CPU @ 2.50GHz
+BenchmarkLoad-4   	     570	   2131978 ns/op	    3102 B/op	      42 allocs/op
+BenchmarkLoad-4   	     561	   2105125 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     554	   2097266 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     553	   2248493 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     512	   2068216 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     570	   2147277 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     576	   2110436 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     556	   2030976 ns/op	    3102 B/op	      42 allocs/op
+BenchmarkLoad-4   	     567	   2123335 ns/op	    3102 B/op	      42 allocs/op
+BenchmarkLoad-4   	     566	   2125351 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     582	   2136066 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     595	   2055471 ns/op	    3102 B/op	      42 allocs/op
+BenchmarkLoad-4   	     549	   2154495 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     532	   2175191 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     553	   2070150 ns/op	    3102 B/op	      42 allocs/op
+BenchmarkLoad-4   	     537	   2140394 ns/op	    3102 B/op	      42 allocs/op
+BenchmarkLoad-4   	     556	   2128753 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     553	   2141316 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     568	   2147658 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     536	   2111357 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     597	   2080864 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     555	   2124613 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     530	   2126289 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     548	   2105938 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     550	   2140616 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     565	   2138329 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     610	   2100387 ns/op	    3101 B/op	      42 allocs/op
+BenchmarkLoad-4   	     553	   2155740 ns/op	    3102 B/op	      42 allocs/op
+BenchmarkLoad-4   	     579	   2100331 ns/op	    3102 B/op	      42 allocs/op
+BenchmarkLoad-4   	     546	   1912813 ns/op	    3102 B/op	      42 allocs/op
+PASS
+ok  	github.com/qiwik/yarticle/load	42.037s
