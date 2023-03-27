@@ -15,31 +15,23 @@ type st struct {
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-func randStringBytes() string {
-	b := make([]byte, 10)
-	for i := range b {
-		b[i] = letterBytes[rand.Intn(len(letterBytes))]
-	}
-	return string(b)
-}
-
 func main() {
 	http.HandleFunc("/sort", sorting)
 	log.Printf("Serving on port 8081...")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }
 
-func sorting(w http.ResponseWriter, r *http.Request) { //203 = 203 - встраивалась до этого?
+func sorting(w http.ResponseWriter, r *http.Request) {
 	sortSlice()
 	w.WriteHeader(http.StatusOK)
 }
 
-func sortSlice() { //153 -> 498
+func sortSlice() {
 	sl := createForBubble()
 	bubbleSort(sl)
 }
 
-func createForBubble() []st { //129 = 129
+func createForBubble() []st {
 	newSl := make([]st, 0)
 
 	for i := 0; i < 10000; i++ {
@@ -48,7 +40,7 @@ func createForBubble() []st { //129 = 129
 	return newSl
 }
 
-func bubbleSort(sl []st) { //65 = 65
+func bubbleSort(sl []st) {
 	var sorts bool
 
 	for !sorts {
@@ -83,41 +75,50 @@ func strSum(one string) (sum int) {
 }
 
 func compare(cur, next st) bool {
-	k := 0
+	count := 0
 	if strSum(cur.f) > strSum(next.f) {
-		k++
+		count++
 	}
 
-	if second(cur, next, k) {
+	count, success := second(cur, next, count)
+	if success {
 		return true
 	}
 
-	if third(cur, next, k) {
+	if third(cur, next, count) {
 		return true
 	}
 
 	return false
 }
 
-func second(cur, next st, k int) bool {
+func second(cur, next st, c int) (int, bool) {
 	if strSum(cur.s) > strSum(next.s) {
-		k++
+		c++
 	}
 
-	if k > 1 {
+	if c > 1 {
+		return c, true
+	}
+
+	return c, false
+}
+
+func third(cur, next st, c int) bool {
+	if strSum(cur.t) > strSum(next.t) {
+		c++
+	}
+
+	if c > 1 {
 		return true
 	}
-
 	return false
 }
 
-func third(cur, next st, k int) bool {
-	if strSum(cur.t) > strSum(next.t) {
-		k++
+func randStringBytes() string {
+	b := make([]byte, 10)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
 	}
-
-	if k > 1 {
-		return true
-	}
-	return false
+	return string(b)
 }
