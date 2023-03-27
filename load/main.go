@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"log"
-	"math/rand"
 	"net/http"
 )
 
@@ -17,14 +16,14 @@ func main() {
 }
 
 func load() error {
-	vars := []string{"bubble_sort", "fusion_sort"}
-	i := rand.Intn(2)
+	//vars := []string{"bubble_sort", "fusion_sort"}
+	//i := rand.Intn(2)
 
 	var requestBody bytes.Buffer
-	requestBody.Write([]byte(vars[i]))
+	requestBody.Write([]byte("bubble_sort"))
 
 	client := http.Client{}
-	request, err := http.NewRequest("GET", "http://localhost:8080/sort", &requestBody)
+	request, err := http.NewRequest("GET", "http://localhost:8081/sort", &requestBody)
 	if err != nil {
 		return err
 	}
