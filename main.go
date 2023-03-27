@@ -30,50 +30,23 @@ func main() {
 }
 
 func sorting(w http.ResponseWriter, r *http.Request) { //203 = 203 - встраивалась до этого?
-	if sortSlice() {
-		w.WriteHeader(http.StatusOK)
-		return
-	}
-
-	w.WriteHeader(http.StatusInternalServerError)
+	sortSlice()
+	w.WriteHeader(http.StatusOK)
 }
 
-func sortSlice() bool { //153 -> 498
-	sl := create()
+func sortSlice() { //153 -> 498
+	sl := createForBubble()
 	bubbleSort(sl)
-	return true
 }
-
-func create() []st { //201 -> 345
-	return createForBubble()
-}
-
-//func seed() rand.Source { //183 -> 369
-//	return rand.NewSource(time.Now().UnixNano())
-//}
 
 func createForBubble() []st { //129 = 129
 	newSl := make([]st, 0)
 
 	for i := 0; i < 10000; i++ {
-		newSl = append(newSl, struct {
-			f string
-			s string
-			t string
-		}{f: randStringBytes(), s: randStringBytes(), t: randStringBytes()})
+		newSl = append(newSl, st{f: randStringBytes(), s: randStringBytes(), t: randStringBytes()})
 	}
 	return newSl
 }
-
-//func createForFusion(s rand.Source) []int { //129 = 129
-//	newSl := make([]int, 0)
-//
-//	for i := 0; i < 1000; i++ {
-//		n := rand.New(s).Int()
-//		newSl = append(newSl, n)
-//	}
-//	return newSl
-//}
 
 func bubbleSort(sl []st) { //65 = 65
 	var sorts bool
@@ -84,22 +57,6 @@ func bubbleSort(sl []st) { //65 = 65
 		sorts = iteration(firstVal, sl)
 	}
 }
-
-//func iteration(current int, sl []int) bool {
-//	sorts := true
-//
-//	for i := 1; i < len(sl); i++ {
-//		next := sl[i]
-//		if current > next {
-//			sl[i], sl[i-1] = sl[i-1], sl[i]
-//			sorts = false
-//		} else {
-//			current = next
-//		}
-//	}
-//
-//	return sorts
-//}
 
 func iteration(current st, sl []st) bool {
 	sorts := true
@@ -164,37 +121,3 @@ func third(cur, next st, k int) bool {
 	}
 	return false
 }
-
-//func fusionSort(sl []int) []int {
-//	if len(sl) == 1 {
-//		return sl
-//	}
-//	left := fusionSort(sl[0 : len(sl)/2])
-//	right := fusionSort(sl[len(sl)/2:])
-//
-//	result := make([]int, len(sl))
-//
-//	l, r, k := 0, 0, 0
-//	for l < len(left) && r < len(right) {
-//		if left[l] <= right[r] {
-//			result[k] = left[l]
-//			l++
-//		} else {
-//			result[k] = right[r]
-//			r++
-//		}
-//		k++
-//	}
-//
-//	for l < len(left) {
-//		result[k] = left[l]
-//		l++
-//		k++
-//	}
-//	for r < len(right) {
-//		result[k] = right[r]
-//		r++
-//		k++
-//	}
-//	return result
-//}
