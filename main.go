@@ -18,7 +18,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func sorting(w http.ResponseWriter, r *http.Request) { //203 = 203 - встраивалась до этого?
+func sorting(w http.ResponseWriter, r *http.Request) {
 	src, err := io.ReadAll(r.Body)
 	if err != nil {
 		return
@@ -29,13 +29,13 @@ func sorting(w http.ResponseWriter, r *http.Request) { //203 = 203 - встра�
 	w.WriteHeader(http.StatusOK)
 }
 
-func sortSlice(method string) bool { //153 -> 498
+func sortSlice(method string) bool {
 	sl := create(method)
 	b := sort(sl, method)
 	return b
 }
 
-func create(m string) []int { //201 -> 345
+func create(m string) []int {
 	sl := make([]int, 0)
 	s := seed()
 
@@ -49,11 +49,11 @@ func create(m string) []int { //201 -> 345
 	return sl
 }
 
-func seed() rand.Source { //183 -> 369
+func seed() rand.Source {
 	return rand.NewSource(time.Now().UnixNano())
 }
 
-func createForBubble(s rand.Source) []int { //129 = 129
+func createForBubble(s rand.Source) []int {
 	newSl := make([]int, 0)
 
 	for i := 0; i < 1000; i++ {
@@ -63,7 +63,7 @@ func createForBubble(s rand.Source) []int { //129 = 129
 	return newSl
 }
 
-func createForFusion(s rand.Source) []int { //129 = 129
+func createForFusion(s rand.Source) []int {
 	newSl := make([]int, 0)
 
 	for i := 0; i < 10000; i++ {
@@ -73,7 +73,7 @@ func createForFusion(s rand.Source) []int { //129 = 129
 	return newSl
 }
 
-func sort(sl []int, m string) bool { //136 = 136
+func sort(sl []int, m string) bool {
 	switch m {
 	case bubble:
 		bubbleSort(sl)
@@ -84,7 +84,7 @@ func sort(sl []int, m string) bool { //136 = 136
 	return true
 }
 
-func bubbleSort(sl []int) { //65 = 65
+func bubbleSort(sl []int) {
 	sorts := false
 
 	for !sorts {
