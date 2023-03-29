@@ -8,9 +8,11 @@ import (
 )
 
 type st struct {
-	f string
-	s string
-	t string
+	first  string
+	second string
+	third  string
+	fourth string
+	fifth  string
 }
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -35,7 +37,13 @@ func createForBubble() []st {
 	newSl := make([]st, 0)
 
 	for i := 0; i < 10000; i++ {
-		newSl = append(newSl, st{f: randStringBytes(), s: randStringBytes(), t: randStringBytes()})
+		newSl = append(newSl, st{
+			first:  randStringBytes(),
+			second: randStringBytes(),
+			third:  randStringBytes(),
+			fourth: randStringBytes(),
+			fifth:  randStringBytes(),
+		})
 	}
 	return newSl
 }
@@ -54,12 +62,12 @@ func iteration(current st, sl []st) bool {
 	sorts := true
 
 	for i := 1; i < len(sl); i++ {
-		val2 := sl[i]
-		if compare(current, val2) {
+		next := sl[i]
+		if compare(current, next) {
 			sl[i], sl[i-1] = sl[i-1], sl[i]
 			sorts = false
 		} else {
-			current = val2
+			current = next
 		}
 	}
 
@@ -76,40 +84,61 @@ func strSum(one string) (sum int) {
 
 func compare(cur, next st) bool {
 	count := 0
-	if strSum(cur.f) > strSum(next.f) {
+	if strSum(cur.first) > strSum(next.first) {
 		count++
 	}
 
-	count, success := second(cur, next, count)
+	count = secondStr(cur, next, count)
+
+	count, success := thirdStr(cur, next, count)
 	if success {
 		return true
 	}
 
-	if third(cur, next, count) {
+	count, success = fourthStr(cur, next, count)
+	if success {
 		return true
 	}
 
-	return false
+	return fifthStr(cur, next, count)
 }
 
-func second(cur, next st, c int) (int, bool) {
-	if strSum(cur.s) > strSum(next.s) {
+func secondStr(cur, next st, c int) int {
+	if strSum(cur.second) > strSum(next.second) {
 		c++
 	}
 
-	if c > 1 {
-		return c, true
+	return c
+}
+
+func thirdStr(cur, next st, c int) (int, bool) {
+	if strSum(cur.third) > strSum(next.third) {
+		c++
 	}
 
+	if c > 2 {
+		return c, true
+	}
 	return c, false
 }
 
-func third(cur, next st, c int) bool {
-	if strSum(cur.t) > strSum(next.t) {
+func fourthStr(cur, next st, c int) (int, bool) {
+	if strSum(cur.fourth) > strSum(next.fourth) {
 		c++
 	}
 
-	if c > 1 {
+	if c > 2 {
+		return c, true
+	}
+	return c, false
+}
+
+func fifthStr(cur, next st, c int) bool {
+	if strSum(cur.fifth) > strSum(next.fifth) {
+		c++
+	}
+
+	if c > 2 {
 		return true
 	}
 	return false

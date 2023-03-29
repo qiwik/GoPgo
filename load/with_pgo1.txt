@@ -1,0 +1,26 @@
+goos: linux
+goarch: amd64
+pkg: github.com/qiwik/yarticle/load
+cpu: Intel(R) Core(TM) i5-4200M CPU @ 2.50GHz
+BenchmarkLoad-4   	      63	  19128837 ns/op	    2662 B/op	      34 allocs/op
+BenchmarkLoad-4   	      56	  19037961 ns/op	    2663 B/op	      34 allocs/op
+BenchmarkLoad-4   	      58	  19825423 ns/op	    2667 B/op	      34 allocs/op
+BenchmarkLoad-4   	      57	  20193670 ns/op	    2662 B/op	      34 allocs/op
+BenchmarkLoad-4   	      52	  20178414 ns/op	    2670 B/op	      34 allocs/op
+BenchmarkLoad-4   	      57	  20224623 ns/op	    2661 B/op	      34 allocs/op
+BenchmarkLoad-4   	      56	  19935718 ns/op	    2662 B/op	      34 allocs/op
+BenchmarkLoad-4   	      51	  20129824 ns/op	    2671 B/op	      34 allocs/op
+BenchmarkLoad-4   	      52	  20121416 ns/op	    2672 B/op	      34 allocs/op
+BenchmarkLoad-4   	      55	  19907646 ns/op	    2662 B/op	      34 allocs/op
+BenchmarkLoad-4   	      64	  20357486 ns/op	    2659 B/op	      34 allocs/op
+BenchmarkLoad-4   	      52	  19933609 ns/op	    2670 B/op	      34 allocs/op
+BenchmarkLoad-4   	      57	  20072509 ns/op	    2661 B/op	      34 allocs/op
+BenchmarkLoad-4   	      50	  20139875 ns/op	    2666 B/op	      34 allocs/op
+BenchmarkLoad-4   	      67	  20032450 ns/op	    2657 B/op	      34 allocs/op
+BenchmarkLoad-4   	      55	  20445755 ns/op	    2669 B/op	      34 allocs/op
+BenchmarkLoad-4   	      55	  20015681 ns/op	    2657 B/op	      34 allocs/op
+BenchmarkLoad-4   	      56	  19694631 ns/op	    2663 B/op	      34 allocs/op
+BenchmarkLoad-4   	      55	  19971115 ns/op	    2663 B/op	      34 allocs/op
+BenchmarkLoad-4   	      58	  20195569 ns/op	    2661 B/op	      34 allocs/op
+PASS
+ok  	github.com/qiwik/yarticle/load	22.928s
