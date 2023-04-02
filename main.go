@@ -32,7 +32,7 @@ func seed() rand.Source {
 func createForBubble(s rand.Source) []int {
 	newSl := make([]int, 0)
 
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 10000; i++ {
 		n := rand.New(s).Int()
 		newSl = append(newSl, n)
 	}
