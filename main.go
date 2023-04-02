@@ -1,16 +1,12 @@
 package main
 
 import (
-	"io"
 	"log"
 	"math/rand"
 	"net/http"
 	_ "net/http/pprof"
 	"time"
 )
-
-const bubble = "bubble_sort"
-const fusion = "fusion_sort"
 
 func main() {
 	http.HandleFunc("/sort", sorting)
@@ -19,34 +15,14 @@ func main() {
 }
 
 func sorting(w http.ResponseWriter, r *http.Request) {
-	src, err := io.ReadAll(r.Body)
-	if err != nil {
-		return
-	}
-	method := string(src)
-	_ = sortSlice(method)
-
+	sortSlice()
 	w.WriteHeader(http.StatusOK)
 }
 
-func sortSlice(method string) bool {
-	sl := create(method)
-	b := sort(sl, method)
-	return b
-}
-
-func create(m string) []int {
-	sl := make([]int, 0)
+func sortSlice() {
 	s := seed()
-
-	switch m {
-	case bubble:
-		sl = createForBubble(s)
-	case fusion:
-		sl = createForFusion(s)
-	}
-
-	return sl
+	sl := createForBubble(s)
+	bubbleSort(sl)
 }
 
 func seed() rand.Source {
@@ -61,27 +37,6 @@ func createForBubble(s rand.Source) []int {
 		newSl = append(newSl, n)
 	}
 	return newSl
-}
-
-func createForFusion(s rand.Source) []int {
-	newSl := make([]int, 0)
-
-	for i := 0; i < 10000; i++ {
-		n := rand.New(s).Int()
-		newSl = append(newSl, n)
-	}
-	return newSl
-}
-
-func sort(sl []int, m string) bool {
-	switch m {
-	case bubble:
-		bubbleSort(sl)
-	case fusion:
-		fusionSort(sl)
-	}
-
-	return true
 }
 
 func bubbleSort(sl []int) {
@@ -101,38 +56,4 @@ func bubbleSort(sl []int) {
 			}
 		}
 	}
-}
-
-func fusionSort(sl []int) []int {
-	if len(sl) == 1 {
-		return sl
-	}
-	left := fusionSort(sl[0 : len(sl)/2])
-	right := fusionSort(sl[len(sl)/2:])
-
-	result := make([]int, len(sl))
-
-	l, r, k := 0, 0, 0
-	for l < len(left) && r < len(right) {
-		if left[l] <= right[r] {
-			result[k] = left[l]
-			l++
-		} else {
-			result[k] = right[r]
-			r++
-		}
-		k++
-	}
-
-	for l < len(left) {
-		result[k] = left[l]
-		l++
-		k++
-	}
-	for r < len(right) {
-		result[k] = right[r]
-		r++
-		k++
-	}
-	return result
 }
