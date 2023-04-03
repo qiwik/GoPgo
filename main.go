@@ -1,11 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
-	"math/rand"
 	"net/http"
 	_ "net/http/pprof"
-	"time"
 )
 
 func main() {
@@ -15,28 +14,19 @@ func main() {
 }
 
 func sorting(w http.ResponseWriter, r *http.Request) {
-	sortSlice()
-	w.WriteHeader(http.StatusOK)
-}
+	req := r.Body
 
-func sortSlice() {
-	s := seed()
-	sl := createForBubble(s)
-	bubbleSort(sl)
-}
-
-func seed() rand.Source {
-	return rand.NewSource(time.Now().UnixNano())
-}
-
-func createForBubble(s rand.Source) []int {
-	newSl := make([]int, 0)
-
-	for i := 0; i < 10000; i++ {
-		n := rand.New(s).Int()
-		newSl = append(newSl, n)
+	var sl []int
+	err := json.NewDecoder(req).Decode(&sl)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		req.Close()
+		return
 	}
-	return newSl
+
+	req.Close()
+	bubbleSort(sl)
+	w.WriteHeader(http.StatusOK)
 }
 
 func bubbleSort(sl []int) {
@@ -55,5 +45,13 @@ func bubbleSort(sl []int) {
 				val1 = val2
 			}
 		}
+	}
+
+	stubFunc(sl)
+}
+
+func stubFunc(sl []int) {
+	for i, s := range sl {
+		sl[i] = s * 2
 	}
 }
