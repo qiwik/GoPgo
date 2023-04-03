@@ -1,0 +1,26 @@
+goos: windows
+goarch: amd64
+pkg: github.com/qiwik/yarticle/load
+cpu: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+BenchmarkLoad-8   	     740	   1621996 ns/op	   72934 B/op	      59 allocs/op
+BenchmarkLoad-8   	     742	   1682033 ns/op	   73016 B/op	      59 allocs/op
+BenchmarkLoad-8   	     711	   1587124 ns/op	   72939 B/op	      59 allocs/op
+BenchmarkLoad-8   	     751	   1595925 ns/op	   72814 B/op	      59 allocs/op
+BenchmarkLoad-8   	     751	   1561687 ns/op	   73346 B/op	      60 allocs/op
+BenchmarkLoad-8   	     718	   1571701 ns/op	   72642 B/op	      59 allocs/op
+BenchmarkLoad-8   	     746	   1594872 ns/op	   73710 B/op	      59 allocs/op
+BenchmarkLoad-8   	     771	   1584560 ns/op	   72843 B/op	      59 allocs/op
+BenchmarkLoad-8   	     764	   1602670 ns/op	   72950 B/op	      59 allocs/op
+BenchmarkLoad-8   	     763	   1601234 ns/op	   73728 B/op	      60 allocs/op
+BenchmarkLoad-8   	     722	   1572523 ns/op	   72545 B/op	      59 allocs/op
+BenchmarkLoad-8   	     745	   1632990 ns/op	   73449 B/op	      59 allocs/op
+BenchmarkLoad-8   	     754	   1606356 ns/op	   73676 B/op	      59 allocs/op
+BenchmarkLoad-8   	     765	   1571015 ns/op	   72518 B/op	      59 allocs/op
+BenchmarkLoad-8   	     778	   1562656 ns/op	   73331 B/op	      59 allocs/op
+BenchmarkLoad-8   	     760	   1588073 ns/op	   73395 B/op	      59 allocs/op
+BenchmarkLoad-8   	     724	   1612576 ns/op	   73535 B/op	      60 allocs/op
+BenchmarkLoad-8   	     739	   1598525 ns/op	   72854 B/op	      59 allocs/op
+BenchmarkLoad-8   	     742	   1593943 ns/op	   73642 B/op	      60 allocs/op
+BenchmarkLoad-8   	     723	   1569190 ns/op	   73996 B/op	      60 allocs/op
+PASS
+ok  	github.com/qiwik/yarticle/load	27.374s
