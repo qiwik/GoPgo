@@ -1,0 +1,25 @@
+goos: darwin
+goarch: arm64
+pkg: te/load
+BenchmarkLoad-8   	      14	  78590592 ns/op	  754498 B/op	      74 allocs/op
+BenchmarkLoad-8   	      14	  78875214 ns/op	  829688 B/op	      78 allocs/op
+BenchmarkLoad-8   	      14	  78796256 ns/op	  904682 B/op	      81 allocs/op
+BenchmarkLoad-8   	      14	  78708777 ns/op	  979786 B/op	      83 allocs/op
+BenchmarkLoad-8   	      14	  78719095 ns/op	  754491 B/op	      74 allocs/op
+BenchmarkLoad-8   	      14	  78646318 ns/op	  717075 B/op	      74 allocs/op
+BenchmarkLoad-8   	      14	  78744033 ns/op	  679563 B/op	      72 allocs/op
+BenchmarkLoad-8   	      14	  79071342 ns/op	  829752 B/op	      79 allocs/op
+BenchmarkLoad-8   	      14	  78973098 ns/op	  717010 B/op	      73 allocs/op
+BenchmarkLoad-8   	      14	  79113298 ns/op	  754498 B/op	      74 allocs/op
+BenchmarkLoad-8   	      14	  79016405 ns/op	  904938 B/op	      82 allocs/op
+BenchmarkLoad-8   	      14	  79212610 ns/op	  792190 B/op	      76 allocs/op
+BenchmarkLoad-8   	      14	  79144473 ns/op	  942288 B/op	      81 allocs/op
+BenchmarkLoad-8   	      14	  78636479 ns/op	  979853 B/op	      84 allocs/op
+BenchmarkLoad-8   	      14	  78773298 ns/op	  792272 B/op	      77 allocs/op
+BenchmarkLoad-8   	      14	  78836060 ns/op	  867177 B/op	      80 allocs/op
+BenchmarkLoad-8   	      14	  78975926 ns/op	  792230 B/op	      77 allocs/op
+BenchmarkLoad-8   	      14	  79001664 ns/op	  829671 B/op	      78 allocs/op
+BenchmarkLoad-8   	      14	  78614682 ns/op	  792234 B/op	      77 allocs/op
+BenchmarkLoad-8   	      14	  79060411 ns/op	  754505 B/op	      74 allocs/op
+PASS
+ok  	te/load	24.826s
