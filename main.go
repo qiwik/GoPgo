@@ -59,6 +59,7 @@ func iteration(current int, sl []int) bool {
 	return sorts
 }
 
+// Опциональная функция. Результаты с ней идут с суффиксом _1 в файлах. Без нее без суффикса
 func compare(cur, next, i int, sl []int) (int, bool) {
 	if cur > next {
 		sl[i], sl[i-1] = sl[i-1], sl[i]
