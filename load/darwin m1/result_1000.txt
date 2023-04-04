@@ -1,8 +1,0 @@
-name    old time/op    new time/op    delta
-Load-8    1.15ms ± 1%    1.16ms ± 0%  +0.36%  (p=0.000 n=18+17)
-
-name    old alloc/op   new alloc/op   delta
-Load-8    72.7kB ± 1%    72.6kB ± 1%    ~     (p=0.588 n=20+20)
-
-name    old allocs/op  new allocs/op  delta
-Load-8      60.0 ± 0%      60.0 ± 0%    ~     (all equal)
