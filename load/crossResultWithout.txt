@@ -1,0 +1,18 @@
+// сравнение без compare() и с compare()
+
+goos: linux
+goarch: amd64
+pkg: github.com/qiwik/yarticle/load
+cpu: Intel(R) Core(TM) i5-4200M CPU @ 2.50GHz
+       │ without.txt  │            without_1.txt            │
+       │    sec/op    │   sec/op     vs base                │
+Load-4   1282.7µ ± 0%   982.0µ ± 1%  -23.45% (p=0.000 n=20)
+
+       │ without.txt  │            without_1.txt            │
+       │     B/op     │     B/op      vs base               │
+Load-4   70.34Ki ± 0%   70.56Ki ± 0%  +0.31% (p=0.001 n=20)
+
+       │ without.txt │         without_1.txt          │
+       │  allocs/op  │ allocs/op   vs base            │
+Load-4    61.00 ± 0%   61.00 ± 0%  ~ (p=1.000 n=20) ¹
+¹ all samples are equal

@@ -14,44 +14,69 @@ func main() {
 }
 
 func sorting(w http.ResponseWriter, r *http.Request) {
-	req := r.Body
-
 	var sl []int
-	err := json.NewDecoder(req).Decode(&sl)
+	err := json.NewDecoder(r.Body).Decode(&sl)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		req.Close()
+		// не использую defer, потому что тогда не произойдет встраивания
+		r.Body.Close()
 		return
 	}
 
-	req.Close()
+	// не использую defer, потому что тогда не произойдет встраивания
+	r.Body.Close()
 	bubbleSort(sl)
 	w.WriteHeader(http.StatusOK)
 }
 
 func bubbleSort(sl []int) {
-	sorts := false
+	var sorts bool
 
 	for !sorts {
 		sorts = true
-		val1 := sl[0]
-
-		for i := 1; i < len(sl); i++ {
-			val2 := sl[i]
-			if val1 > val2 {
-				sl[i], sl[i-1] = sl[i-1], sl[i]
-				sorts = false
-			} else {
-				val1 = val2
-			}
-		}
+		firstVal := sl[0]
+		sorts = iteration(firstVal, sl)
 	}
 
-	stubFunc(sl)
+	stubDivide(sl)
 }
 
-func stubFunc(sl []int) {
+// Отделяем блок кода, который имеет конкретную функцию
+func iteration(current int, sl []int) bool {
+	sorts := true
+
+	for i := 1; i < len(sl); i++ {
+		next := sl[i]
+		current, sorts = compare(current, next, i, sl)
+	}
+
+	// нагружаем функцию iteration(). Сначала вычитываем новый порядок, затем делим каждый элемент, потом снова вычитываем
+	// для того, чтобы убедиться, что все ок
+	stubLoop(sl)
+	stubDivide(sl)
+	stubLoop(sl)
+
+	return sorts
+}
+
+func compare(cur, next, i int, sl []int) (int, bool) {
+	if cur > next {
+		sl[i], sl[i-1] = sl[i-1], sl[i]
+		return cur, false
+	}
+	return next, true
+}
+
+// Симулируем некую полезную работу над слайсом
+func stubDivide(sl []int) {
 	for i, s := range sl {
-		sl[i] = s * 2
+		sl[i] = s / 2
+	}
+}
+
+// Симулируем обход слайса после каждой итерации для того, чтобы, например, выписать обновленный порядок в консоль
+func stubLoop(sl []int) {
+	for i, _ := range sl {
+		_ = sl[i]
 	}
 }

@@ -10,20 +10,21 @@ import (
 )
 
 func main() {
-	s := seed()
-	sl := createForBubble(s)
+	//s := seed()
+	//sl := createForBubble(s)
 
 	for {
-		err := load(sl)
+		err := load()
 		if err != nil {
 			log.Fatalf("we have an error: %v", err)
 		}
 	}
 }
 
-func load(sl []int) error {
-	//s := seed()
-	//sl := createForBubble(s)
+func load() error {
+	// каждый раз содаем новый слайс, чтобы симулировать различные варианты приходящих данных
+	s := seed()
+	sl := createForBubble(s)
 
 	b, err := json.Marshal(sl)
 	if err != nil {
@@ -51,7 +52,9 @@ func seed() rand.Source {
 func createForBubble(s rand.Source) []int {
 	newSl := make([]int, 0)
 
-	for i := 0; i < 10000; i++ {
+	// так как пузырек имеет О(n^2), то смысла создавать слайс с большим количеством элементов просто нет.
+	// ограничимся 1000 элементов, что уже очень много для этой сортировки
+	for i := 0; i < 1000; i++ {
 		n := rand.New(s).Int()
 		newSl = append(newSl, n)
 	}
