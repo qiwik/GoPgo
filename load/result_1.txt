@@ -1,16 +1,14 @@
-// с функцией compare()
-
 goos: linux
 goarch: amd64
 pkg: github.com/qiwik/yarticle/load
 cpu: Intel(R) Core(TM) i5-4200M CPU @ 2.50GHz
        │ with_1.txt  │           without_1.txt            │
        │   sec/op    │   sec/op     vs base               │
-Load-4   927.5µ ± 0%   982.0µ ± 1%  +5.87% (p=0.000 n=20)
+Load-4   938.4µ ± 1%   978.9µ ± 1%  +4.31% (p=0.000 n=20)
 
        │  with_1.txt  │         without_1.txt          │
        │     B/op     │     B/op      vs base          │
-Load-4   70.53Ki ± 0%   70.56Ki ± 0%  ~ (p=0.180 n=20)
+Load-4   70.51Ki ± 0%   70.46Ki ± 0%  ~ (p=0.429 n=20)
 
        │ with_1.txt │         without_1.txt          │
        │ allocs/op  │ allocs/op   vs base            │
