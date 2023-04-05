@@ -55,5 +55,23 @@ func bubbleSort(sl []int) {
 				val1 = val2
 			}
 		}
+
+		stubLoop(sl)
+	}
+
+	stubDivide(sl)
+}
+
+// Симулируем некую полезную работу над слайсом
+func stubDivide(sl []int) {
+	for i, s := range sl {
+		sl[i] = s / 2
+	}
+}
+
+// Симулируем обход слайса после каждой итерации для того, чтобы, например, выписать обновленный порядок в консоль
+func stubLoop(sl []int) {
+	for i, _ := range sl {
+		_ = sl[i]
 	}
 }
