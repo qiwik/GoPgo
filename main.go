@@ -1,12 +1,18 @@
 package main
 
 import (
+	"encoding/json"
+	"io"
 	"log"
-	"math/rand"
 	"net/http"
 	_ "net/http/pprof"
-	"time"
 )
+
+type example struct {
+	FirstField  string `json:"first"`
+	SecondField string `json:"second"`
+	ThirdField  string `json:"third"`
+}
 
 func main() {
 	http.HandleFunc("/sort", sorting)
@@ -15,63 +21,73 @@ func main() {
 }
 
 func sorting(w http.ResponseWriter, r *http.Request) {
-	sortSlice()
+	var sl []example
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	err = json.Unmarshal(body, &sl)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	bubbleSort(sl)
 	w.WriteHeader(http.StatusOK)
 }
 
-func sortSlice() {
-	s := seed()
-	sl := createForBubble(s)
-	bubbleSort(sl)
-}
-
-func seed() rand.Source {
-	return rand.NewSource(time.Now().UnixNano())
-}
-
-func createForBubble(s rand.Source) []int {
-	newSl := make([]int, 0)
-
-	for i := 0; i < 10000; i++ {
-		n := rand.New(s).Int()
-		newSl = append(newSl, n)
-	}
-	return newSl
-}
-
-func bubbleSort(sl []int) {
-	sorts := false
-
-	for !sorts {
-		sorts = true
-		val1 := sl[0]
-
-		for i := 1; i < len(sl); i++ {
-			val2 := sl[i]
-			if val1 > val2 {
-				sl[i], sl[i-1] = sl[i-1], sl[i]
-				sorts = false
-			} else {
-				val1 = val2
+func bubbleSort(sl []example) {
+	for i := 0; i < len(sl)-1; i++ {
+		for j := i + 1; j < len(sl); j++ {
+			if compare(sl[i], sl[j]) {
+				sl[i], sl[j] = sl[j], sl[i]
 			}
 		}
-
-		stubLoop(sl)
-	}
-
-	stubDivide(sl)
-}
-
-// Симулируем некую полезную работу над слайсом
-func stubDivide(sl []int) {
-	for i, s := range sl {
-		sl[i] = s / 2
 	}
 }
 
-// Симулируем обход слайса после каждой итерации для того, чтобы, например, выписать обновленный порядок в консоль
-func stubLoop(sl []int) {
-	for i, _ := range sl {
-		_ = sl[i]
+func compare(left, right example) bool {
+	comparing := firstFieldCompare(left.FirstField, right.FirstField)
+	comparing = secondFieldCompare(left.SecondField, right.SecondField, comparing)
+	if comparing > 1 {
+		return true
 	}
+	return thirdFieldCompare(left.ThirdField, right.ThirdField, comparing)
+}
+
+func firstFieldCompare(left, right string) int {
+	if strSum(left) > strSum(right) {
+		return 1
+	}
+
+	return 0
+}
+
+func secondFieldCompare(left, right string, comparing int) int {
+	if strSum(left) > strSum(right) {
+		comparing++
+	}
+
+	return comparing
+}
+
+func thirdFieldCompare(left, right string, comparing int) bool {
+	if strSum(left) > strSum(right) {
+		comparing++
+	}
+
+	if comparing > 1 {
+		return true
+	}
+
+	return false
+}
+
+func strSum(one string) (sum int) {
+	for s := range one {
+		sum += s
+	}
+
+	return
 }

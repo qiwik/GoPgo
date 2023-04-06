@@ -2,14 +2,14 @@ goos: linux
 goarch: amd64
 pkg: github.com/qiwik/yarticle/load
 cpu: Intel(R) Core(TM) i5-4200M CPU @ 2.50GHz
-       │ with_2.txt  │           without_2.txt            │
+       │  with.txt   │            without.txt             │
        │   sec/op    │   sec/op     vs base               │
-Load-4   182.0m ± 1%   183.5m ± 0%  +0.83% (p=0.000 n=20)
+Load-4   36.10m ± 1%   36.27m ± 1%  +0.48% (p=0.017 n=20)
 
-       │  with_2.txt  │         without_2.txt          │
+       │   with.txt   │          without.txt           │
        │     B/op     │     B/op      vs base          │
-Load-4   2.853Ki ± 0%   2.853Ki ± 0%  ~ (p=0.747 n=20)
+Load-4   342.6Ki ± 4%   342.6Ki ± 3%  ~ (p=0.635 n=20)
 
-       │ with_2.txt │        without_2.txt         │
-       │ allocs/op  │ allocs/op   vs base          │
-Load-4   36.00 ± 0%   36.00 ± 0%  ~ (p=0.737 n=20)
+       │  with.txt   │          without.txt          │
+       │  allocs/op  │  allocs/op   vs base          │
+Load-4   3.063k ± 0%   3.063k ± 0%  ~ (p=0.760 n=20)
