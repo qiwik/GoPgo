@@ -2,10 +2,17 @@ package main
 
 import (
 	"encoding/json"
+	"io"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
 )
+
+type example struct {
+	FirstField  int `json:"first"`
+	SecondField int `json:"second"`
+	ThirdField  int `json:"third"`
+}
 
 func main() {
 	http.HandleFunc("/sort", sorting)
@@ -14,69 +21,73 @@ func main() {
 }
 
 func sorting(w http.ResponseWriter, r *http.Request) {
-	var sl []int
-	err := json.NewDecoder(r.Body).Decode(&sl)
+	var sl []example
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		// не использую defer, потому что тогда не произойдет встраивания
-		r.Body.Close()
+		return
+	}
+	err = json.Unmarshal(body, &sl)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
-	// не использую defer, потому что тогда не произойдет встраивания
-	r.Body.Close()
 	bubbleSort(sl)
 	w.WriteHeader(http.StatusOK)
 }
 
-func bubbleSort(sl []int) {
-	var sorts bool
-
-	for !sorts {
-		sorts = true
-		firstVal := sl[0]
-		sorts = iteration(firstVal, sl)
-	}
-
-	stubDivide(sl)
-}
-
-// Отделяем блок кода, который имеет конкретную функцию
-func iteration(current int, sl []int) bool {
-	sorts := true
-
-	for i := 1; i < len(sl); i++ {
-		next := sl[i]
-		current, sorts = compare(current, next, i, sl)
-	}
-
-	// нагружаем функцию iteration(). Сначала вычитываем новый порядок, затем делим каждый элемент, потом снова вычитываем
-	// для того, чтобы убедиться, что все ок
-	stubLoop(sl)
-	stubDivide(sl)
-	stubLoop(sl)
-
-	return sorts
-}
-
-func compare(cur, next, i int, sl []int) (int, bool) {
-	if cur > next {
-		sl[i], sl[i-1] = sl[i-1], sl[i]
-		return cur, false
-	}
-	return next, true
-}
-
-// Симулируем некую полезную работу над слайсом
-func stubDivide(sl []int) {
-	for i, s := range sl {
-		sl[i] = s / 2
+func bubbleSort(sl []example) {
+	for i := 0; i < len(sl)-1; i++ {
+		for j := i + 1; j < len(sl); j++ {
+			if compare(sl[i], sl[j]) {
+				sl[i], sl[j] = sl[j], sl[i]
+			}
+		}
 	}
 }
 
-// Симулируем обход слайса после каждой итерации для того, чтобы, например, выписать обновленный порядок в консоль
-func stubLoop(sl []int) {
-	for i, _ := range sl {
-		_ = sl[i]
+func compare(left, right example) bool {
+	comparing := firstFieldCompare(left.FirstField, right.FirstField)
+	comparing = secondFieldCompare(left.SecondField, right.SecondField, comparing)
+	if comparing > 1 {
+		return true
 	}
+	return thirdFieldCompare(left.ThirdField, right.ThirdField, comparing)
+}
+
+func firstFieldCompare(left, right int) int {
+	if stubIncrease(stubDecrease(left)) > stubIncrease(stubDecrease(right)) {
+		return 1
+	}
+
+	return 0
+}
+
+func secondFieldCompare(left, right, comparing int) int {
+	if stubIncrease(stubDecrease(left)) > stubIncrease(stubDecrease(right)) {
+		comparing++
+	}
+
+	return comparing
+}
+
+func thirdFieldCompare(left, right, comparing int) bool {
+	if stubIncrease(stubDecrease(left)) > stubIncrease(stubDecrease(right)) {
+		comparing++
+	}
+
+	if comparing > 1 {
+		return true
+	}
+
+	return false
+}
+
+func stubIncrease(i int) int {
+	return i * 10
+}
+
+func stubDecrease(i int) int {
+	return i / 10
 }
