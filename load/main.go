@@ -9,10 +9,13 @@ import (
 	"time"
 )
 
-func main() {
-	//s := seed()
-	//sl := createForBubble(s)
+type example struct {
+	FirstField  int `json:"first"`
+	SecondField int `json:"second"`
+	ThirdField  int `json:"third"`
+}
 
+func main() {
 	for {
 		err := load()
 		if err != nil {
@@ -22,7 +25,7 @@ func main() {
 }
 
 func load() error {
-	// каждый раз содаем новый слайс, чтобы симулировать различные варианты приходящих данных
+	// каждый раз создаем новый слайс, чтобы симулировать различные варианты приходящих данных
 	s := seed()
 	sl := createForBubble(s)
 
@@ -49,14 +52,15 @@ func seed() rand.Source {
 	return rand.NewSource(time.Now().UnixNano())
 }
 
-func createForBubble(s rand.Source) []int {
-	newSl := make([]int, 0)
+func createForBubble(s rand.Source) []example {
+	newSl := make([]example, 0)
 
-	// так как пузырек имеет О(n^2), то смысла создавать слайс с большим количеством элементов просто нет.
-	// ограничимся 1000 элементов, что уже очень много для этой сортировки
 	for i := 0; i < 1000; i++ {
-		n := rand.New(s).Int()
-		newSl = append(newSl, n)
+		newSl = append(newSl, example{
+			FirstField:  rand.New(s).Int(),
+			SecondField: rand.New(s).Int(),
+			ThirdField:  rand.New(s).Int(),
+		})
 	}
 	return newSl
 }

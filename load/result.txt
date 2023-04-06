@@ -1,18 +1,15 @@
-// сравнение происходит в iteration(), а не в отдельной функции
-
 goos: linux
 goarch: amd64
 pkg: github.com/qiwik/yarticle/load
 cpu: Intel(R) Core(TM) i5-4200M CPU @ 2.50GHz
        │  with.txt   │            without.txt             │
        │   sec/op    │   sec/op     vs base               │
-Load-4   1.252m ± 1%   1.283m ± 0%  +2.48% (p=0.000 n=20)
+Load-4   8.982m ± 1%   9.282m ± 1%  +3.35% (p=0.000 n=20)
 
        │   with.txt   │          without.txt           │
        │     B/op     │     B/op      vs base          │
-Load-4   70.40Ki ± 0%   70.34Ki ± 0%  ~ (p=0.355 n=20)
+Load-4   224.2Ki ± 1%   222.3Ki ± 2%  ~ (p=0.242 n=20)
 
-       │  with.txt  │          without.txt           │
-       │ allocs/op  │ allocs/op   vs base            │
-Load-4   61.00 ± 0%   61.00 ± 0%  ~ (p=1.000 n=20) ¹
-¹ all samples are equal
+       │  with.txt  │         without.txt          │
+       │ allocs/op  │ allocs/op   vs base          │
+Load-4   63.00 ± 2%   62.00 ± 2%  ~ (p=0.567 n=20)
